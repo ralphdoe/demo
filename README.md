@@ -2,6 +2,9 @@
 Spring Boot Project with Swagger and Spring Security
 
 MySQL Configuration:
-create database opentech; -- Create the new database 
-create user 'opentech'@'%' identified by 'opentech'; -- Creates the user 
-grant all on opentech.* to 'opentech'@'%'; -- Gives all the privileges to the new user on the newly created database
+# Create the new database 
+create database demo; 
+# Creates the user 
+create user 'demo'@'%' identified by 'demo'; 
+# Gives all the privileges to the new user on the newly created database
+grant all on demo.* to 'demo'@'%'; 
