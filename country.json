@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Country API",
+    "description": "Country API"
+  },
+  "servers": [
+    {
+      "description": "SwaggerHub API Auto Mocking",
+      "url": "https://virtserver.swaggerhub.com/fgg/Country_API/1.0.0"
+    }
+  ],
+  "paths": {
+    "/countries": {
+      "get": {
+        "summary": "Listar paises.",
+        "description": "Este recursu permite acceder a listado de paises.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Country"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Country": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "alpha2Code",
+          "alpha3Code"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "pattern": "^\\w{2,60}$"
+          },
+          "alpha2Code": {
+            "type": "string",
+            "pattern": "^[A-Z]{2,2}$"
+          },
+          "alpha3Code": {
+            "type": "string",
+            "pattern": "^[A-Z]{3,3}$"
+          },
+          "capital": {
+            "type": "string",
+            "pattern": "^\\w{2,60}$"
+          },
+          "region": {
+            "type": "string",
+            "pattern": "^\\w{2,60}$"
+          },
+          "subregion": {
+            "type": "string",
+            "pattern": "^\\w{2,60}$"
+          },
+          "geolocation": {
+            "$ref": "#/components/schemas/Geolocation"
+          },
+          "area": {
+            "type": "number",
+            "example": 1580
+          },
+          "timezones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "UTC+02:00"
+            ]
+          },
+          "numericCode": {
+            "type": "string",
+            "pattern": "^\\d+$"
+          },
+          "currencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Currency"
+            }
+          },
+          "flag": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://flag.co/co.svg"
+          }
+        }
+      },
+      "Currency": {
+        "type": "object",
+        "required": [
+          "code",
+          "name",
+          "symbol"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[A-Z]{2,3}$",
+            "example": "EUR"
+          },
+          "name": {
+            "type": "string",
+            "pattern": "^[A-Z]{2,10}$",
+            "example": "Euro"
+          },
+          "symbol": {
+            "type": "string",
+            "pattern": "^[\\D]{1,5}$",
+            "example": "€"
+          }
+        }
+      },
+      "Geolocation": {
+        "type": "object",
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "latitude": {
+            "type": "integer",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "longitude": {
+            "type": "integer",
+            "minimum": -180,
+            "maximum": 180
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Código de error",
+            "type": "string"
+          },
+          "status": {
+            "description": "httpstatus",
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string",
+            "description": "Tipo de error"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensaje de error"
+          }
+        }
+      }
+    }
+  }
+}
